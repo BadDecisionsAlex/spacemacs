@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("zshrc.zsh"
+(("keymap.c"
+ (filename . "~/src/misc/qmk/keyboards/ergodone/keymaps/mio/keymap.c")
+ (front-context-string . ",\n              ")
+ (rear-context-string . "P,       KC_BSLS")
+ (position . 4784))
+("zshrc.zsh"
  (filename . "~/.config/zsh/zshrc.zsh")
  (front-context-string . "\" &> /dev/null\"\n")
  (rear-context-string . "command \\\"emacs\\")
