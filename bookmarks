@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("keymap.c"
+(("restapi"
+ (filename . "~/src/textbookit/Bookstore/restapi/")
+ (front-context-string)
+ (rear-context-string . "19 Jul  8 14:25 ")
+ (position . 1005))
+("keymap.c"
  (filename . "~/src/misc/qmk/keyboards/ergodone/keymaps/mio/keymap.c")
  (front-context-string . ",\n              ")
  (rear-context-string . "P,       KC_BSLS")
