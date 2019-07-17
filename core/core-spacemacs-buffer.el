@@ -736,20 +736,15 @@ LIST: a list of string pathnames made interactive in this function."
                                  (file-name-nondirectory
                                   (substring el 0 (- (length el) 1)))
                                (file-name-nondirectory el)))
-
                    (el-color (if (f-directory-p el)
                                  'dired-directory
                                'bookmark-menu-bookmark))
-
                    (filename-colorized (propertize filename 'face el-color))
-
                    (el-colorized (propertize el 'face 'file-name-shadow))
-
                    (tagline-color (if filename
                                       (format "%s - (%s)"
                                               filename-colorized el-colorized)
-                                    (format "%s" el-colorized)))
-                   )
+                                    (format "%s" el-colorized))))
                 (widget-create 'push-button
                                :tag tagline-color
                                :action `(lambda (&rest ignore)
@@ -771,23 +766,17 @@ LIST: a list of string bookmark names made interactive in this function."
     (mapc (lambda (el)
             (insert "\n    ")
             (let* ((filename (bookmark-get-filename el))
-
                    (fileshort (abbreviate-file-name filename))
-
                    (el-color (if (f-directory-p filename)
                              'dired-directory
                            'bookmark-menu-bookmark))
-
                    (el-colorized (propertize el 'face el-color))
-
                    (fileshort-colorized
                     (propertize fileshort 'face 'file-name-shadow))
-
                    (tagline-color (if filename
                                       (format "%s - (%s)"
                                               el-colorized fileshort-colorized)
-                                    (format "%s" el-colorized)))
-                   )
+                                    (format "%s" el-colorized))))
               (widget-create 'push-button
                              :tag tagline-color
                              :action `(lambda (&rest ignore) (bookmark-jump ,el))
