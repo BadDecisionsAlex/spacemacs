@@ -1,35 +1,138 @@
-;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8-emacs -*- 
+;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8-emacs; mode: emacs-lisp -*-
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("restapi"
- (filename . "~/src/textbookit/Bookstore/restapi/")
- (front-context-string)
- (rear-context-string . "19 Jul  8 14:25 ")
- (position . 1005))
-("keymap.c"
- (filename . "~/src/misc/qmk/keyboards/ergodone/keymaps/mio/keymap.c")
- (front-context-string . ",\n              ")
- (rear-context-string . "P,       KC_BSLS")
- (position . 4784))
-("zshrc.zsh"
- (filename . "~/.config/zsh/zshrc.zsh")
- (front-context-string . "\" &> /dev/null\"\n")
- (rear-context-string . "command \\\"emacs\\")
- (position . 1076))
-("home.nix"
- (filename . "~/.config/zsh/home.nix")
- (front-context-string . "{ config, pkgs, ")
- (rear-context-string)
- (position . 1))
-("common.nix"
- (filename . "/etc/nixos/common.nix")
- (front-context-string . "{ config, lib, p")
- (rear-context-string)
- (position . 1))
-(".spacemacs"
- (filename . "~/.spacemacs")
- (front-context-string . "  (define-key ev")
- (rear-context-string . "'bookmark-jump)\n")
- (position . 17302))
+(
+ ("Dot Spacemacs"
+  (filename . "~/.spacemacs")
+  (front-context-string)
+  (rear-context-string)
+  (position . 1))
+
+ ("C"
+  (filename . "~/src/c/")
+  (front-context-string)
+  (rear-context-string)
+  (position . 1))
+
+ ("LISP"
+  (filename . "~/src/lsp/")
+  (front-context-string)
+  (rear-context-string)
+  (position . 1))
+
+ ("Haskell"
+  (filename . "~/src/hask/")
+  (front-context-string)
+  (rear-context-string)
+  (position . 1))
+
+ ("Python"
+  (filename . "~/src/misc/py/")
+  (front-context-string)
+  (rear-context-string)
+  (position . 1))
+
+ ("NextBookIt"
+  (filename . "~/src/textbookit/Bookstore/")
+  (front-context-string)
+  (rear-context-string)
+  (position . 1))
+
+ ("Emacs Dir"
+  (filename . "~/.emacs.d/")
+  (front-context-string)
+  (rear-context-string)
+  (position . 1))
+
+ ("Graphics"
+  (filename . "~/src/gfx/")
+  (front-context-string)
+  (rear-context-string)
+  (position . 1))
+
+ ("Debugging and Verifying"
+  (filename . "~/src/dvp/")
+  (front-context-string)
+  (rear-context-string)
+  (position . 1))
+
+ ("Home Manager Config"
+  (filename . "~/.config/nixpkgs/home.nix")
+  (front-context-string)
+  (rear-context-string)
+  (position . 1))
+
+ ("Notes"
+  (filename . "~/docs/notes/")
+  (front-context-string)
+  (rear-context-string)
+  (position . 1))
+
+ ("NixOS Common"
+  (filename . "/etc/nixos/common.nix")
+  (front-context-string)
+  (rear-context-string)
+  (position . 1))
+
+ ("NixOS Config"
+  (filename . "/etc/nixos/configuration.nix")
+  (front-context-string)
+  (rear-context-string)
+  (position . 1))
+
+ ("ZSHRC"
+  (filename . "~/.config/zsh/zshrc.zsh")
+  (front-context-string)
+  (rear-context-string)
+  (position . 1))
+
+ ("ZSH Nix"
+  (filename . "~/.config/zsh/home.nix")
+  (front-context-string)
+  (rear-context-string)
+  (position . 1))
+
+ ("Dot XMonad"
+  (filename . "~/.xmonad/")
+  (front-context-string)
+  (rear-context-string)
+  (position . 1))
+
+ ("XMonad Nix"
+  (filename . "~/.config/xmonad/home.nix")
+  (front-context-string)
+  (rear-context-string)
+  (position . 1))
+
+ ("XMonad Configs"
+  (filename . "~/.config/xmonad/src")
+  (front-context-string)
+  (rear-context-string)
+  (position . 1))
+
+ ("NeoVim Init"
+  (filename . "~/.config/nvim/init.vim")
+  (front-context-string)
+  (rear-context-string)
+  (position . 1))
+
+ ("NeoVim Nix"
+  (filename . "~/.config/nvim/home.nix")
+  (front-context-string)
+  (rear-context-string)
+  (position . 1))
+
+ ("Ergodone Keymap"
+  (filename . "~/src/misc/qmk/keyboards/ergodone/keymaps/mio/keymap.c")
+  (front-context-string)
+  (rear-context-string)
+  (position . 1))
+
+ ("Emacs Bookmarks"
+  (filename . "~/.emacs.d/bookmarks")
+  (front-context-string)
+  (rear-context-string)
+  (position . 1))
+
 )
