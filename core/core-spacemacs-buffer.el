@@ -871,22 +871,76 @@ LIST: list of `org-agenda' entries in the todo list."
                                   (cdr (assoc "time" b))))))))
     (mapc (lambda (el)
             (insert "\n    ")
-            (widget-create 'push-button
-                           :action `(lambda (&rest ignore)
-                                      (spacemacs-buffer//org-jump ',el))
-                           :mouse-face 'highlight
-                           :follow-link "\C-m"
-                           :button-prefix ""
-                           :button-suffix ""
-                           :format "%[%t%]"
-                           (format "%s %s %s"
-                                   (abbreviate-file-name
-                                    (cdr (assoc "file" el)))
-                                   (if (not (eq "" (cdr (assoc "time" el))))
-                                       (format "- %s -"
-                                               (cdr (assoc "time" el)))
-                                     "-")
-                                   (cdr (assoc "text" el)))))
+            (let* (;; File
+                   (fileshort (abbreviate-file-name (cdr (assoc "file" el))))
+                   (fileshort-colorized
+                    (propertize fileshort 'face 'file-name-shadow))
+                   ;; Time
+                   (time (cdr (assoc "time" el)))
+                   (time-colorized
+                    (propertize time 'face 'org-date))
+                   (time-or-sep (if (not (eq "" time-colorized))
+                                 (format "- %s -" time-colorized)
+                               "-"))
+                   ;; Task
+                   (task (cdr (assoc "text" el)))
+                   (task-label (first (split-string task)))
+                   (task-item
+                    (mapconcat 'identity (rest (split-string task)) " "))
+                   (todo-keywords (mapcar #'car hl-todo-keyword-faces))
+                   (known-label (member task-label todo-keywords))
+                   (label-color
+                    (if known-label
+                        (rest (assoc task-label hl-todo-keyword-faces))
+                      nil))
+                   (label-face
+                    (if known-label
+                        `(:bold t :foreground ,label-color)
+                      'bold))
+                   ;; The Task Label
+                   (task-label-colorized (propertize task-label
+                                                     'face
+                                                     label-face))
+                   ;; The Task Description
+                   (darken-amount 31)
+                   (item-face
+                    (flet ((strip-hash (h)
+                                       (if (s-starts-with-p "#" h)
+                                           (substring h 1)
+                                         h))
+                           (hex->dec (h)
+                                     (string-to-number (strip-hash h) 16))
+                           (darken-color (h)
+                                        (let* ((sh (strip-hash h))
+                                               (r (hex->dec (substring sh 0 2)))
+                                               (g (hex->dec (substring sh 2 4)))
+                                               (b (hex->dec (substring sh 4 6)))
+                                               (r* (max 0 (- r darken-amount)))
+                                               (g* (max 0 (- g darken-amount)))
+                                               (b* (max 0 (- b darken-amount))))
+                                          (format "#%x%x%x" r* g* b*))))
+                      (if known-label
+                          `(:bold t :foreground ,(darken-color label-color))
+                        'org-agenda-calendar-event)))
+                   (task-item-colorized (propertize task-item
+                                                    'face
+                                                    item-face))
+                   (tagline-colorized (format "%s %s %s (%s)"
+                                              task-label-colorized
+                                              task-item-colorized
+                                              time-or-sep
+                                              fileshort-colorized)))
+              (widget-create 'push-button
+                             :tag tagline-colorized
+                             :action `(lambda (&rest ignore)
+                                        (spacemacs-buffer//org-jump ',el))
+                             :mouse-face 'highlight
+                             :follow-link "\C-m"
+                             :button-prefix ""
+                             :button-suffix ""
+                             :format "%[%t%]"
+                             tagline-colorized
+                             )))
           list)))
 
 (defun spacemacs//subseq (seq start end)
