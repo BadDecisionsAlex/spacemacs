@@ -898,7 +898,7 @@ LIST: list of `org-agenda' entries in the todo list."
                         `(:bold t :foreground ,label-color)
                       'bold))
                    ;; The Task Label
-                   (task-label-colorized (propertize task-label
+                   (task-label-colorized (propertize (concat task-label ":")
                                                      'face
                                                      label-face))
                    ;; The Task Description

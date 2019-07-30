@@ -99,6 +99,10 @@
   (filename . "~/docs/notes/agenda.org")
   (front-context-string) (rear-context-string) (position . 1))
 
+ ("Src Todo"
+  (filename . "~/src/TODO.org")
+  (front-context-string) (rear-context-string) (position . 1))
+
 ;; Emacs: ------------------------------------------------------------------- ;;
 
  ;; ("Dot Spacemacs"
