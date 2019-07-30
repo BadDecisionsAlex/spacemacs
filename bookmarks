@@ -37,9 +37,9 @@
   (filename . "~/src/misc/qmk/keyboards/ergodone/keymaps/mio/keymap.c")
   (front-context-string) (rear-context-string) (position . 1))
 
- ("Notes"
-  (filename . "~/docs/notes/")
-  (front-context-string) (rear-context-string) (position . 1))
+ ;; ("Notes"
+ ;;  (filename . "~/docs/notes/")
+ ;;  (front-context-string) (rear-context-string) (position . 1))
 
 ;; Nix: --------------------------------------------------------------------- ;;
 
