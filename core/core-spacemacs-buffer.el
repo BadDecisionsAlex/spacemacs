@@ -895,7 +895,7 @@ LIST: list of `org-agenda' entries in the todo list."
                       nil))
                    (label-face
                     (if known-label
-                        `(:bold t :foreground ,label-color)
+                        `(:weight bold :foreground ,label-color)
                       'bold))
                    ;; The Task Label
                    (task-label-colorized (propertize (concat task-label ":")
@@ -920,7 +920,7 @@ LIST: list of `org-agenda' entries in the todo list."
                                                (b* (max 0 (- b darken-amount))))
                                           (format "#%x%x%x" r* g* b*))))
                       (if known-label
-                          `(:bold t :foreground ,(darken-color label-color))
+                          `(:weight bold :foreground ,(darken-color label-color))
                         'org-agenda-calendar-event)))
                    (task-item-colorized (propertize task-item
                                                     'face
