@@ -788,6 +788,44 @@ LIST: a list of string bookmark names made interactive in this function."
                              tagline-color)))
           list)))
 
+(defun spacemacs-buffer//insert-named-file-list (list-display-name list)
+  "Insert an interactive list of named file entries in the home buffer.
+Input list should be of `(nick-name . file-name)' pairs
+LIST-DISPLAY-NAME: the displayed title of the list.
+LIST: a list of string bookmark names made interactive in this function."
+  (when (car list)
+    (insert list-display-name)
+    (mapc (lambda (el)
+            (insert "\n    ")
+            ;; FIXME - Some default function (likely `spacemacs//subseq')
+            ;; forces you to provide a list of strings! You need to keep an
+            ;; alternative hash-map that holds filenames. (Similar to bookmarks)
+            (let* (;;(filename (cdr el))
+                   ;;(fileshort (car el))
+                   (filename el)
+                   (fileshort el)
+                   (el-color (if (f-directory-p filename)
+                             'dired-directory
+                           'bookmark-menu-bookmark))
+                   (el-colorized (propertize el 'face el-color))
+                   (fileshort-colorized
+                    (propertize fileshort 'face 'file-name-shadow))
+                   (tagline-color (if filename
+                                      (format "%s - (%s)"
+                                              el-colorized fileshort-colorized)
+                                    (format "%s" el-colorized))))
+              (widget-create 'push-button
+                             :tag tagline-color
+                             :action `(lambda (&rest ignore)
+                                        (find-file-existing ,filename))
+                             :mouse-face 'highlight
+                             :follow-link "\C-m"
+                             :button-prefix ""
+                             :button-suffix ""
+                             :format "%[%t%]"
+                             tagline-color)))
+          list)))
+
 (defun spacemacs-buffer//get-org-items (types)
   "Make a list of agenda file items for today of kind types.
 TYPES: list of `org-mode' types to fetch."
@@ -1009,7 +1047,15 @@ SEQ, START and END are the same arguments as for `cl-subseq'"
                        (spacemacs//subseq (projectile-relevant-known-projects)
                                           0 list-size))
                   (spacemacs-buffer||add-shortcut "p" "Projects:")
-                  (insert list-separator))))))
+                  (insert list-separator)))
+               ((eq el 'courses)
+                (when (spacemacs-buffer//insert-named-file-list
+                       "Course Agendas:"
+                       (spacemacs//subseq course-agendas
+                                          0 list-size))
+                  (spacemacs-buffer||add-shortcut "C" "Course Agendas:")
+                  (insert list-separator)))
+               )))
           (append
            '(warnings)
            dotspacemacs-startup-lists))))
