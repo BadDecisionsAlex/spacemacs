@@ -798,16 +798,14 @@ LIST: a list of string bookmark names made interactive in this function."
     (mapc (lambda (el)
             (insert "\n    ")
             (print el t)
-            (let* ((fileshort (cdr el))
-                   (filename (car el))
+            (let* ((fileshort (car el))
+                   (filename (cdr el))
                    (el-color 'bookmark-menu-bookmark)
-                   (el-colorized (propertize filename 'face el-color))
-                   (fileshort-colorized
-                    (propertize fileshort 'face 'file-name-shadow))
+                   (el-colorized (propertize fileshort 'face el-color))
+                   (filename-colorized
+                    (propertize filename 'face 'file-name-shadow))
                    (tagline-color (format "%s - (%s)"
-                                          el-colorized fileshort-colorized)))
-              (print filename t)
-              (print fileshort t)
+                                          el-colorized filename-colorized)))
               (widget-create 'push-button
                              :tag tagline-color
                              :action `(lambda (&rest ignore)
