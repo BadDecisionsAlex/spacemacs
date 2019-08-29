@@ -797,23 +797,17 @@ LIST: a list of string bookmark names made interactive in this function."
     (insert list-display-name)
     (mapc (lambda (el)
             (insert "\n    ")
-            ;; FIXME - Some default function (likely `spacemacs//subseq')
-            ;; forces you to provide a list of strings! You need to keep an
-            ;; alternative hash-map that holds filenames. (Similar to bookmarks)
-            (let* (;;(filename (cdr el))
-                   ;;(fileshort (car el))
-                   (filename el)
-                   (fileshort el)
-                   (el-color (if (f-directory-p filename)
-                             'dired-directory
-                           'bookmark-menu-bookmark))
-                   (el-colorized (propertize el 'face el-color))
+            (print el t)
+            (let* ((fileshort (cdr el))
+                   (filename (car el))
+                   (el-color 'bookmark-menu-bookmark)
+                   (el-colorized (propertize filename 'face el-color))
                    (fileshort-colorized
                     (propertize fileshort 'face 'file-name-shadow))
-                   (tagline-color (if filename
-                                      (format "%s - (%s)"
-                                              el-colorized fileshort-colorized)
-                                    (format "%s" el-colorized))))
+                   (tagline-color (format "%s - (%s)"
+                                          el-colorized fileshort-colorized)))
+              (print filename t)
+              (print fileshort t)
               (widget-create 'push-button
                              :tag tagline-color
                              :action `(lambda (&rest ignore)
@@ -823,7 +817,8 @@ LIST: a list of string bookmark names made interactive in this function."
                              :button-prefix ""
                              :button-suffix ""
                              :format "%[%t%]"
-                             tagline-color)))
+                             tagline-color
+                             )))
           list)))
 
 (defun spacemacs-buffer//get-org-items (types)
@@ -1051,8 +1046,9 @@ SEQ, START and END are the same arguments as for `cl-subseq'"
                ((eq el 'courses)
                 (when (spacemacs-buffer//insert-named-file-list
                        "Course Agendas:"
-                       (spacemacs//subseq course-agendas
-                                          0 list-size))
+                       course-agendas)
+                       ;; (spacemacs//subseq course-agendas
+                       ;;                    0 list-size))
                   (spacemacs-buffer||add-shortcut "C" "Course Agendas:")
                   (insert list-separator)))
                )))
