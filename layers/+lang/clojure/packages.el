@@ -74,7 +74,7 @@
           (spacemacs/set-leader-keys-for-major-mode m
             "ha" 'cider-apropos
             "hc" 'cider-cheatsheet
-            "hg" 'cider-grimoire
+            "hd" 'cider-clojuredocs
             "hh" 'cider-doc
             "hj" 'cider-javadoc
             "hn" 'cider-browse-ns
@@ -118,6 +118,7 @@
             "sE" 'spacemacs/cider-send-last-sexp-to-repl-focus
             "sf" 'spacemacs/cider-send-function-to-repl
             "sF" 'spacemacs/cider-send-function-to-repl-focus
+            "si" 'cider-jack-in-clj
             "sjc" 'cider-jack-in-clj
             "sjf" 'cider-jack-in-clj&cljs
             "sjs" 'cider-jack-in-cljs

@@ -1,4 +1,4 @@
-;;; layers.el --- Scala layer layers File for Spacemacs
+;;; config.el --- search-engine configuration File for Spacemacs
 ;;
 ;; Copyright (c) 2012-2018 Sylvain Benner & Contributors
 ;;
@@ -9,5 +9,7 @@
 ;;
 ;;; License: GPLv3
 
+;; Variables
 
-(configuration-layer/declare-layers '(lsp java))
+(defvar search-engine-config-list nil
+  "Set additional search engines")
