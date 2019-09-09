@@ -78,7 +78,7 @@
 
       (evilified-state-evilify gnus-group-mode gnus-group-mode-map
         (kbd "g r") 'gnus-group-get-new-news
-        (kbd "G") 'gnus-group-group-map)
+        (kbd "O") 'gnus-group-group-map)
       (evilified-state-evilify gnus-server-mode gnus-server-mode-map)
       (evilified-state-evilify gnus-browse-mode gnus-browse-mode-map)
       (evilified-state-evilify gnus-article-mode gnus-article-mode-map)
