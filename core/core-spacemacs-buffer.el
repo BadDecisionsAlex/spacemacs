@@ -189,7 +189,9 @@ Cate special text banner can de reachable via `998', `cat' or `random*'.
 If ALL is non-nil then truly all banners can be selected."
   (setq spacemacs-buffer--random-banner
         (or spacemacs-buffer--random-banner
-            (let* ((files (directory-files spacemacs-banner-directory t ".*\.txt"))
+            (let* ((files (directory-files spacemacs-banner-directory
+                                           t
+                                           ".*\.txt"))
                    (count (length files))
                    ;; -2 to remove the two last ones (easter eggs)
                    (choice (random (- count (if all 0 2)))))
@@ -207,7 +209,8 @@ BANNER: the path to an ascii banner file."
            (spec (create-image banner))
            (size (image-size spec))
            (width (car size))
-           (left-margin (max 0 (floor (- spacemacs-buffer--window-width width) 2))))
+           (left-margin (max 0 (floor (- spacemacs-buffer--window-width width)
+                                      2))))
       (goto-char (point-min))
       (insert "\n")
       (insert (make-string left-margin ?\s))
@@ -342,13 +345,17 @@ MIN-WIDTH is the minimal width of the frame, frame included.  The frame will not
                                                       width)
       (fill-region (point-min) (point-max) nil nil)
       (concat
-       "╭─" (when topcaption (propertize (concat " " topcaption " ")
-                                         'face
-                                         '(:weight bold)))
-       (make-string (max 0 (- width (if topcaption 6 4) topcaption-length)) ?─) "─╮\n"
+       "╭─"
+       (when topcaption (propertize (concat " " topcaption " ")
+                                    'face
+                                    '(:weight bold)))
+       (make-string (max 0 (- width (if topcaption 6 4) topcaption-length)) ?─)
+       "─╮\n"
        (spacemacs-buffer//notes-render-framed-line "" width hpadding)
        (mapconcat (lambda (line)
-                    (spacemacs-buffer//notes-render-framed-line line width hpadding))
+                    (spacemacs-buffer//notes-render-framed-line line
+                                                                width
+                                                                hpadding))
                   (split-string (buffer-string) "\n" nil) "")
        (spacemacs-buffer//notes-render-framed-line "" width hpadding)
        "╰─" (when botcaption (propertize (concat " " botcaption " ")
@@ -471,14 +478,14 @@ ADDITIONAL-WIDGETS: a function for inserting a widget under the frame."
                                       'subtree))
                            :mouse-face 'highlight
                            :follow-link "\C-m")))))
-    (spacemacs-buffer//notes-insert-note (concat spacemacs-release-notes-directory
-                                                 spacemacs-buffer-version-info
-                                                 ".txt")
-                                         (format "Important Notes (Release %s.x)"
-                                                 spacemacs-buffer-version-info)
-                                         "Update your dotfile (SPC f e D) and\
- packages after every update"
-                                         widget-func))
+    (spacemacs-buffer//notes-insert-note
+     (concat spacemacs-release-notes-directory
+             spacemacs-buffer-version-info
+             ".txt")
+     (format "Important Notes (Release %s.x)"
+             spacemacs-buffer-version-info)
+     "Update your dotfile (SPC f e D) and packages after every update"
+     widget-func))
   (setq spacemacs-buffer--release-note-version nil)
   (spacemacs/dump-vars-to-file '(spacemacs-buffer--release-note-version)
                                spacemacs-buffer--cache-file))
@@ -797,7 +804,6 @@ LIST: a list of string bookmark names made interactive in this function."
     (insert list-display-name)
     (mapc (lambda (el)
             (insert "\n    ")
-            (print el t)
             (let* ((fileshort (car el))
                    (filename (cdr el))
                    (el-color 'bookmark-menu-bookmark)
@@ -1140,9 +1146,10 @@ REFRESH if the buffer should be redrawn."
     (when (or (not (eq spacemacs-buffer--last-width (window-width)))
               (not buffer-exists)
               refresh)
-      (setq spacemacs-buffer--window-width (if dotspacemacs-startup-buffer-responsive
-                                               (window-width)
-                                             80)
+      (setq spacemacs-buffer--window-width
+            (if dotspacemacs-startup-buffer-responsive
+                (window-width)
+              80)
             spacemacs-buffer--last-width spacemacs-buffer--window-width)
       (with-current-buffer (get-buffer-create spacemacs-buffer-name)
         (page-break-lines-mode)

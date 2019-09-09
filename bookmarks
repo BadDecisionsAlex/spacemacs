@@ -21,17 +21,17 @@
   (filename . "~/src/misc/py/")
   (front-context-string) (rear-context-string) (position . 1))
 
- ("NextBookIt"
-  (filename . "~/src/textbookit/Bookstore/")
-  (front-context-string) (rear-context-string) (position . 1))
+ ;; ("NextBookIt"
+ ;;  (filename . "~/src/textbookit/Bookstore/")
+ ;;  (front-context-string) (rear-context-string) (position . 1))
 
- ("Graphics"
-  (filename . "~/src/gfx/")
-  (front-context-string) (rear-context-string) (position . 1))
+ ;; ("Graphics"
+ ;;  (filename . "~/src/gfx/")
+ ;;  (front-context-string) (rear-context-string) (position . 1))
 
- ("Debugging and Verifying"
-  (filename . "~/src/dvp/")
-  (front-context-string) (rear-context-string) (position . 1))
+ ;; ("Debugging and Verifying"
+ ;;  (filename . "~/src/dvp/")
+ ;;  (front-context-string) (rear-context-string) (position . 1))
 
  ("Ergodone Keymap"
   (filename . "~/src/misc/qmk/keyboards/ergodone/keymaps/mio/keymap.c")
@@ -71,13 +71,13 @@
   (filename . "~/.xmonad/")
   (front-context-string) (rear-context-string) (position . 1))
 
- ("XMonad Nix"
-  (filename . "~/.config/xmonad/home.nix")
-  (front-context-string) (rear-context-string) (position . 1))
+ ;; ("XMonad Nix"
+ ;;  (filename . "~/.config/xmonad/home.nix")
+ ;;  (front-context-string) (rear-context-string) (position . 1))
 
- ("XMonad Configs"
-  (filename . "~/.config/xmonad/src")
-  (front-context-string) (rear-context-string) (position . 1))
+ ;; ("XMonad Configs"
+ ;;  (filename . "~/.config/xmonad/src")
+ ;;  (front-context-string) (rear-context-string) (position . 1))
 
 ;; Vim: --------------------------------------------------------------------- ;;
 
@@ -99,9 +99,9 @@
   (filename . "~/docs/notes/agenda.org")
   (front-context-string) (rear-context-string) (position . 1))
 
- ("Src Todo"
-  (filename . "~/src/TODO.org")
-  (front-context-string) (rear-context-string) (position . 1))
+ ;; ("Src Todo"
+ ;;  (filename . "~/src/TODO.org")
+ ;;  (front-context-string) (rear-context-string) (position . 1))
 
 ;; Emacs: ------------------------------------------------------------------- ;;
 
