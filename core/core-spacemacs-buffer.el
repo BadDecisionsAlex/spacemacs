@@ -797,7 +797,6 @@ LIST: a list of string bookmark names made interactive in this function."
     (insert list-display-name)
     (mapc (lambda (el)
             (insert "\n    ")
-            (print el t)
             (let* ((fileshort (car el))
                    (filename (cdr el))
                    (el-color 'bookmark-menu-bookmark)
