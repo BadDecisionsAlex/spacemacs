@@ -870,6 +870,16 @@ ITEM:"
         (cons "time"
               (get-text-property 0 'time item))))
 
+;; (cons "time"
+;;       (let ((time-prop
+;;              (get-text-property 0 'time item))
+;;             (deadline-prop
+;;              (get-text-property 0 'deadline item)))
+;;         (if (string= "" time-prop)
+;;             deadline-prop
+;;           time-prop)))
+;; ))
+
 (defun spacemacs-buffer//org-jump (el)
   "Action executed when using an item in the home buffer's todo list.
 EL: `org-agenda' element to jump to."
@@ -964,8 +974,8 @@ LIST: list of `org-agenda' entries in the todo list."
                                                     item-face))
                    (tagline-colorized (format "%s %s %s (%s)"
                                               task-label-colorized
-                                              task-item-colorized
                                               time-or-sep
+                                              task-item-colorized
                                               fileshort-colorized)))
               (widget-create 'push-button
                              :tag tagline-colorized
