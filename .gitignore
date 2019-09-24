@@ -55,6 +55,7 @@ eclipse.jdt.ls
 .trello
 .extension
 mspyls/
+transient/
 
 # Private directory
 private/

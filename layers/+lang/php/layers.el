@@ -1,4 +1,4 @@
-;;; layers.el --- Python Layer declarations File for Spacemacs
+;;; layers.el --- PHP Layer declarations File for Spacemacs
 ;;
 ;; Copyright (c) 2012-2019 Sylvain Benner & Contributors
 ;;
@@ -9,6 +9,6 @@
 ;;
 ;;; License: GPLv3
 
-(when (and (boundp 'python-backend)
-           (eq python-backend 'lsp))
-  (configuration-layer/declare-layers '(lsp dap)))
+(when (and (boundp 'php-backend)
+           (eq php-backend 'lsp))
+  (configuration-layer/declare-layer 'lsp))
