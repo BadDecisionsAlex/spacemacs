@@ -745,7 +745,7 @@ LIST: a list of string pathnames made interactive in this function."
                                (file-name-nondirectory el)))
                    (el-color (if (f-directory-p el)
                                  'dired-directory
-                               'bookmark-menu-bookmark))
+                               'bold))
                    (filename-colorized (propertize filename 'face el-color))
                    (el-colorized (propertize el 'face 'file-name-shadow))
                    (tagline-color (if filename
@@ -776,7 +776,7 @@ LIST: a list of string bookmark names made interactive in this function."
                    (fileshort (abbreviate-file-name filename))
                    (el-color (if (f-directory-p filename)
                              'dired-directory
-                           'bookmark-menu-bookmark))
+                           'bold))
                    (el-colorized (propertize el 'face el-color))
                    (fileshort-colorized
                     (propertize fileshort 'face 'file-name-shadow))
@@ -806,7 +806,7 @@ LIST: a list of string bookmark names made interactive in this function."
             (insert "\n    ")
             (let* ((fileshort (car el))
                    (filename (cdr el))
-                   (el-color 'bookmark-menu-bookmark)
+                   (el-color 'bold)
                    (el-colorized (propertize fileshort 'face el-color))
                    (filename-colorized
                     (propertize filename 'face 'file-name-shadow))
