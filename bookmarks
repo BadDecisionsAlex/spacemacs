@@ -5,6 +5,10 @@
 (
 ;; Projects: ---------------------------------------------------------------- ;;
 
+ ("PoGo"
+  (filename . "~/docs/notes/pokemon/pokemon.org")
+  (front-context-string) (rear-context-string) (position . 1))
+
  ("C"
   (filename . "~/src/c/")
   (front-context-string) (rear-context-string) (position . 1))
