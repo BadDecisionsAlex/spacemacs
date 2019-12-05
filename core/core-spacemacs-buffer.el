@@ -189,9 +189,7 @@ Cate special text banner can de reachable via `998', `cat' or `random*'.
 If ALL is non-nil then truly all banners can be selected."
   (setq spacemacs-buffer--random-banner
         (or spacemacs-buffer--random-banner
-            (let* ((files (directory-files spacemacs-banner-directory
-                                           t
-                                           ".*\.txt"))
+            (let* ((files (directory-files spacemacs-banner-directory t ".*\.txt"))
                    (count (length files))
                    ;; -2 to remove the two last ones (easter eggs)
                    (choice (random (- count (if all 0 2)))))
@@ -209,8 +207,7 @@ BANNER: the path to an ascii banner file."
            (spec (create-image banner))
            (size (image-size spec))
            (width (car size))
-           (left-margin (max 0 (floor (- spacemacs-buffer--window-width width)
-                                      2))))
+           (left-margin (max 0 (floor (- spacemacs-buffer--window-width width) 2))))
       (goto-char (point-min))
       (insert "\n")
       (insert (make-string left-margin ?\s))
@@ -345,17 +342,13 @@ MIN-WIDTH is the minimal width of the frame, frame included.  The frame will not
                                                       width)
       (fill-region (point-min) (point-max) nil nil)
       (concat
-       "╭─"
-       (when topcaption (propertize (concat " " topcaption " ")
-                                    'face
-                                    '(:weight bold)))
-       (make-string (max 0 (- width (if topcaption 6 4) topcaption-length)) ?─)
-       "─╮\n"
+       "╭─" (when topcaption (propertize (concat " " topcaption " ")
+                                         'face
+                                         '(:weight bold)))
+       (make-string (max 0 (- width (if topcaption 6 4) topcaption-length)) ?─) "─╮\n"
        (spacemacs-buffer//notes-render-framed-line "" width hpadding)
        (mapconcat (lambda (line)
-                    (spacemacs-buffer//notes-render-framed-line line
-                                                                width
-                                                                hpadding))
+                    (spacemacs-buffer//notes-render-framed-line line width hpadding))
                   (split-string (buffer-string) "\n" nil) "")
        (spacemacs-buffer//notes-render-framed-line "" width hpadding)
        "╰─" (when botcaption (propertize (concat " " botcaption " ")
@@ -478,14 +471,14 @@ ADDITIONAL-WIDGETS: a function for inserting a widget under the frame."
                                       'subtree))
                            :mouse-face 'highlight
                            :follow-link "\C-m")))))
-    (spacemacs-buffer//notes-insert-note
-     (concat spacemacs-release-notes-directory
-             spacemacs-buffer-version-info
-             ".txt")
-     (format "Important Notes (Release %s.x)"
-             spacemacs-buffer-version-info)
-     "Update your dotfile (SPC f e D) and packages after every update"
-     widget-func))
+    (spacemacs-buffer//notes-insert-note (concat spacemacs-release-notes-directory
+                                                 spacemacs-buffer-version-info
+                                                 ".txt")
+                                         (format "Important Notes (Release %s.x)"
+                                                 spacemacs-buffer-version-info)
+                                         "Update your dotfile (SPC f e D) and\
+ packages after every update"
+                                         widget-func))
   (setq spacemacs-buffer--release-note-version nil)
   (spacemacs/dump-vars-to-file '(spacemacs-buffer--release-note-version)
                                spacemacs-buffer--cache-file))
@@ -738,30 +731,15 @@ LIST: a list of string pathnames made interactive in this function."
     (insert list-display-name)
     (mapc (lambda (el)
             (insert "\n    ")
-            (let* ((filename (if (and (string-suffix-p "/" el)
-                                      (< 1 (length el)))
-                                 (file-name-nondirectory
-                                  (substring el 0 (- (length el) 1)))
-                               (file-name-nondirectory el)))
-                   (el-color (if (f-directory-p el)
-                                 'dired-directory
-                               'bold))
-                   (filename-colorized (propertize filename 'face el-color))
-                   (el-colorized (propertize el 'face 'file-name-shadow))
-                   (tagline-color (if filename
-                                      (format "%s - (%s)"
-                                              filename-colorized el-colorized)
-                                    (format "%s" el-colorized))))
-                (widget-create 'push-button
-                               :tag tagline-color
-                               :action `(lambda (&rest ignore)
-                                          (find-file-existing ,el))
-                               :mouse-face 'highlight
-                               :follow-link "\C-m"
-                               :button-prefix ""
-                               :button-suffix ""
-                               :format "%[%t%]"
-                               (abbreviate-file-name el))))
+            (widget-create 'push-button
+                           :action `(lambda (&rest ignore)
+                                      (find-file-existing ,el))
+                           :mouse-face 'highlight
+                           :follow-link "\C-m"
+                           :button-prefix ""
+                           :button-suffix ""
+                           :format "%[%t%]"
+                           (abbreviate-file-name el)))
           list)))
 
 (defun spacemacs-buffer//insert-bookmark-list (list-display-name list)
@@ -772,57 +750,18 @@ LIST: a list of string bookmark names made interactive in this function."
     (insert list-display-name)
     (mapc (lambda (el)
             (insert "\n    ")
-            (let* ((filename (bookmark-get-filename el))
-                   (fileshort (abbreviate-file-name filename))
-                   (el-color (if (f-directory-p filename)
-                             'dired-directory
-                           'bold))
-                   (el-colorized (propertize el 'face el-color))
-                   (fileshort-colorized
-                    (propertize fileshort 'face 'file-name-shadow))
-                   (tagline-color (if filename
-                                      (format "%s - (%s)"
-                                              el-colorized fileshort-colorized)
-                                    (format "%s" el-colorized))))
+            (let ((filename (bookmark-get-filename el)))
               (widget-create 'push-button
-                             :tag tagline-color
                              :action `(lambda (&rest ignore) (bookmark-jump ,el))
                              :mouse-face 'highlight
                              :follow-link "\C-m"
                              :button-prefix ""
                              :button-suffix ""
                              :format "%[%t%]"
-                             tagline-color)))
-          list)))
-
-(defun spacemacs-buffer//insert-named-file-list (list-display-name list)
-  "Insert an interactive list of named file entries in the home buffer.
-Input list should be of `(nick-name . file-name)' pairs
-LIST-DISPLAY-NAME: the displayed title of the list.
-LIST: a list of string bookmark names made interactive in this function."
-  (when (car list)
-    (insert list-display-name)
-    (mapc (lambda (el)
-            (insert "\n    ")
-            (let* ((fileshort (car el))
-                   (filename (cdr el))
-                   (el-color 'bold)
-                   (el-colorized (propertize fileshort 'face el-color))
-                   (filename-colorized
-                    (propertize filename 'face 'file-name-shadow))
-                   (tagline-color (format "%s - (%s)"
-                                          el-colorized filename-colorized)))
-              (widget-create 'push-button
-                             :tag tagline-color
-                             :action `(lambda (&rest ignore)
-                                        (find-file-existing ,filename))
-                             :mouse-face 'highlight
-                             :follow-link "\C-m"
-                             :button-prefix ""
-                             :button-suffix ""
-                             :format "%[%t%]"
-                             tagline-color
-                             )))
+                             (if filename
+                                 (format "%s - %s"
+                                         el (abbreviate-file-name filename))
+                               (format "%s" el)))))
           list)))
 
 (defun spacemacs-buffer//get-org-items (types)
@@ -870,16 +809,6 @@ ITEM:"
         (cons "time"
               (get-text-property 0 'time item))))
 
-;; (cons "time"
-;;       (let ((time-prop
-;;              (get-text-property 0 'time item))
-;;             (deadline-prop
-;;              (get-text-property 0 'deadline item)))
-;;         (if (string= "" time-prop)
-;;             deadline-prop
-;;           time-prop)))
-;; ))
-
 (defun spacemacs-buffer//org-jump (el)
   "Action executed when using an item in the home buffer's todo list.
 EL: `org-agenda' element to jump to."
@@ -918,76 +847,22 @@ LIST: list of `org-agenda' entries in the todo list."
                                   (cdr (assoc "time" b))))))))
     (mapc (lambda (el)
             (insert "\n    ")
-            (let* (;; File
-                   (fileshort (abbreviate-file-name (cdr (assoc "file" el))))
-                   (fileshort-colorized
-                    (propertize fileshort 'face 'file-name-shadow))
-                   ;; Time
-                   (time (cdr (assoc "time" el)))
-                   (time-colorized
-                    (propertize time 'face 'org-date))
-                   (time-or-sep (if (not (eq "" time-colorized))
-                                 (format "- %s -" time-colorized)
-                               "-"))
-                   ;; Task
-                   (task (cdr (assoc "text" el)))
-                   (task-label (first (split-string task)))
-                   (task-item
-                    (mapconcat 'identity (rest (split-string task)) " "))
-                   (todo-keywords (mapcar #'car hl-todo-keyword-faces))
-                   (known-label (member task-label todo-keywords))
-                   (label-color
-                    (if known-label
-                        (rest (assoc task-label hl-todo-keyword-faces))
-                      nil))
-                   (label-face
-                    (if known-label
-                        `(:weight bold :foreground ,label-color)
-                      'bold))
-                   ;; The Task Label
-                   (task-label-colorized (propertize (concat task-label ":")
-                                                     'face
-                                                     label-face))
-                   ;; The Task Description
-                   (darken-amount 31)
-                   (item-face
-                    (flet ((strip-hash (h)
-                                       (if (s-starts-with-p "#" h)
-                                           (substring h 1)
-                                         h))
-                           (hex->dec (h)
-                                     (string-to-number (strip-hash h) 16))
-                           (darken-color (h)
-                                        (let* ((sh (strip-hash h))
-                                               (r (hex->dec (substring sh 0 2)))
-                                               (g (hex->dec (substring sh 2 4)))
-                                               (b (hex->dec (substring sh 4 6)))
-                                               (r* (max 0 (- r darken-amount)))
-                                               (g* (max 0 (- g darken-amount)))
-                                               (b* (max 0 (- b darken-amount))))
-                                          (format "#%x%x%x" r* g* b*))))
-                      (if known-label
-                          `(:weight bold :foreground ,(darken-color label-color))
-                        'org-agenda-calendar-event)))
-                   (task-item-colorized (propertize task-item
-                                                    'face
-                                                    item-face))
-                   (tagline-colorized (format "%s %s %s (%s)"
-                                              task-label-colorized
-                                              time-or-sep
-                                              task-item-colorized
-                                              fileshort-colorized)))
-              (widget-create 'push-button
-                             :tag tagline-colorized
-                             :action `(lambda (&rest ignore)
-                                        (spacemacs-buffer//org-jump ',el))
-                             :mouse-face 'highlight
-                             :follow-link "\C-m"
-                             :button-prefix ""
-                             :button-suffix ""
-                             :format "%[%t%]"
-                             tagline-colorized
-                             )))
+            (widget-create 'push-button
+                           :action `(lambda (&rest ignore)
+                                      (spacemacs-buffer//org-jump ',el))
+                           :mouse-face 'highlight
+                           :follow-link "\C-m"
+                           :button-prefix ""
+                           :button-suffix ""
+                           :format "%[%t%]"
+                           (format "%s %s %s"
+                                   (abbreviate-file-name
+                                    (cdr (assoc "file" el)))
+                                   (if (not (eq "" (cdr (assoc "time" el))))
+                                       (format "- %s -"
+                                               (cdr (assoc "time" el)))
+                                     "-")
+                                   (cdr (assoc "text" el)))))
           list)))
 
 (defun spacemacs//subseq (seq start end)
@@ -1056,16 +931,7 @@ SEQ, START and END are the same arguments as for `cl-subseq'"
                        (spacemacs//subseq (projectile-relevant-known-projects)
                                           0 list-size))
                   (spacemacs-buffer||add-shortcut "p" "Projects:")
-                  (insert list-separator)))
-               ((eq el 'courses)
-                (when (spacemacs-buffer//insert-named-file-list
-                       "Course Agendas:"
-                       course-agendas)
-                       ;; (spacemacs//subseq course-agendas
-                       ;;                    0 list-size))
-                  (spacemacs-buffer||add-shortcut "C" "Course Agendas:")
-                  (insert list-separator)))
-               )))
+                  (insert list-separator))))))
           (append
            '(warnings)
            dotspacemacs-startup-lists))))
@@ -1156,10 +1022,9 @@ REFRESH if the buffer should be redrawn."
     (when (or (not (eq spacemacs-buffer--last-width (window-width)))
               (not buffer-exists)
               refresh)
-      (setq spacemacs-buffer--window-width
-            (if dotspacemacs-startup-buffer-responsive
-                (window-width)
-              80)
+      (setq spacemacs-buffer--window-width (if dotspacemacs-startup-buffer-responsive
+                                               (window-width)
+                                             80)
             spacemacs-buffer--last-width spacemacs-buffer--window-width)
       (with-current-buffer (get-buffer-create spacemacs-buffer-name)
         (page-break-lines-mode)
