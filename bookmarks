@@ -9,6 +9,18 @@
   (filename . "~/docs/notes/pokemon/pokemon.org")
   (front-context-string) (rear-context-string) (position . 1))
 
+ ("Chemistry"
+  (filename . "~/docs/notes/chem/chemistry.org")
+  (front-context-string) (rear-context-string) (position . 1))
+
+ ("Symbolic Programming"
+  (filename . "~/docs/notes/symb/symbolic.org")
+  (front-context-string) (rear-context-string) (position . 1))
+
+ ("Dostoevsky"
+  (filename . "~/docs/notes/dost/dosty.org")
+  (front-context-string) (rear-context-string) (position . 1))
+
  ("C"
   (filename . "~/src/c/")
   (front-context-string) (rear-context-string) (position . 1))
