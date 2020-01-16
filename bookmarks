@@ -7,6 +7,11 @@
  (front-context-string . "** TODO Dostoevs")
  (rear-context-string . "\"nil\")]] [0/0]\n\n")
  (position . 58))
+("Graphics"
+ (filename . "~/src/gfx/TODO.org")
+ (front-context-string)
+ (rear-context-string)
+ (position . 1))
 ("PoGo"
  (filename . "~/docs/notes/pokemon/pokemon.org")
  (front-context-string)
