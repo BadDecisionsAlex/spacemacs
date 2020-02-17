@@ -22,9 +22,15 @@
  (front-context-string)
  (rear-context-string)
  (position . 1))
+("PvPoke"
+ (filename . "/data/repos/pvpoke/src/index.php")
+ (front-context-string)
+ (rear-context-string)
+ (position . 1))
 ("PMSF"
  (filename . "/data/repos/PMSF/static/js/map.common.js")
  (front-context-string)
+ (rear-context-string)
  (position . 1))
 ("C"
  (filename . "~/src/c/")
