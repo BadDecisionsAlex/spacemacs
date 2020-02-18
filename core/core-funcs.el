@@ -323,8 +323,8 @@ current window.
 If `spacemacs-layouts-restrict-spc-tab' is `t' then this only switches between
 the current layouts buffers."
   (interactive)
-  (destructuring-bind (buf start pos)
-      (if spacemacs-layouts-restrict-spc-tab
+  (cl-destructuring-bind (buf start pos)
+      (if (bound-and-true-p spacemacs-layouts-restrict-spc-tab)
           (let ((buffer-list (persp-buffer-list))
                 (my-buffer (window-buffer window)))
             ;; find buffer of the same persp in window
