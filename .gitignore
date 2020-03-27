@@ -73,7 +73,7 @@ workspace
 /doc/COMMUNITY.org
 /doc/CONTRIBUTING.org
 /games/
-private/
+#private/
 !private/README.md
 !private/snippets/README.md
 !private/templates/README.md
