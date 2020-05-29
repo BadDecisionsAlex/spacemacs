@@ -60,6 +60,7 @@ projectile-bookmarks.eld
 projectile.cache
 python-*-docs-html
 quickurls
+racket-mode/
 semanticdb/
 server/
 tmp/
@@ -73,7 +74,7 @@ workspace
 /doc/COMMUNITY.org
 /doc/CONTRIBUTING.org
 /games/
-private/
+#private/
 !private/README.md
 !private/snippets/README.md
 !private/templates/README.md
