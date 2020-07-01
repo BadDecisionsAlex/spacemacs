@@ -1,4 +1,4 @@
-;;; layers.el --- JSON Layer layers File for Spacemacs
+;;; layers.el --- Terraform Layer declarations File for Spacemacs
 ;;
 ;; Copyright (c) 2012-2020 Sylvain Benner & Contributors
 ;;
@@ -9,8 +9,6 @@
 ;;
 ;;; License: GPLv3
 
-(configuration-layer/declare-layer-dependencies '(node prettier web-beautify))
-
-(when (and (boundp 'json-backend)
-           (eq json-backend 'lsp))
+(when (and (boundp 'terraform-backend)
+           (eq terraform-backend 'lsp))
   (configuration-layer/declare-layer-dependencies '(lsp)))
